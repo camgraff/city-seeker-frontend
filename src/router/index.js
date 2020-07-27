@@ -1,14 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import GamePage from '../views/GamePage.vue';
+import Lobby from '../views/Lobby.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
-        path: '/',
-        name: 'GamePage',
-        component: GamePage
+        path: '/game/:id',
+        component: Lobby,
+        props: true
     },
 ];
 
