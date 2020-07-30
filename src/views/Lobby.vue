@@ -15,7 +15,17 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
+import { mapActions } from 'vuex';
+
 export default {
+    props: {
+        // The game ID
+        id: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
             players: [],
@@ -24,15 +34,25 @@ export default {
             nameIsValid: null
         };
     },
+    created() {
+        this.initSocket(); 
+        this.registerListener({event: 'userJoined', callback: (username) => {
+            this.addPlayer(username);
+        }});
+    },
     methods: {
+        ...mapActions([
+            'initSocket',
+            'joinGame',
+            'registerListener'
+        ]),
         handleOk(event) {
             event.preventDefault();
             this.validateForm();
             if (this.nameIsValid) {
-                this.players.push({
-                    name: this.displayName
-                });
+                this.addPlayer(this.displayName);
                 this.showModal = false;
+                this.joinGame({ gameId: this.id, username: this.displayName });
             }
         },
         validateForm() {
@@ -41,6 +61,9 @@ export default {
             } else {
                 this.nameIsValid = false;
             }
+        },
+        addPlayer(name) {
+            this.players.push({ name });
         }
     }
 

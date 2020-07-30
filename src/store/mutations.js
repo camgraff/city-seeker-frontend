@@ -1,0 +1,8 @@
+const types = {
+    // Socket
+    SOCKET_SUCCESS: 'SOCKET_SUCCESS',
+    SOCKET_JOIN_GAME: 'SOCKET_JOIN_GAME',
+    SOCKET_REGISTER_LISTENER: 'SOCKET_REGISTER_LISTENER'
+};
+
+export default types;
