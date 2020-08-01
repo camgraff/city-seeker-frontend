@@ -22,5 +22,4 @@ jobs:
               env:
                   VUE_APP_API_BASE_URL: ${{ secrets.VUE_APP_API_BASE_URL }}
                   VUE_APP_GOOGLE_API_KEY: ${{ secrets.VUE_APP_GOOGLE_API_KEY }}
-              run: |
-                ./scripts/deploy.sh
+              run: ./scripts/deploy.sh
