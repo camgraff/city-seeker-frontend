@@ -16,7 +16,7 @@ git commit -m 'deploy'
 
 
 # if you are deploying to https://<USERNAME>.github.io/<REPO>
-git push -f git@github.com:camgraff/city-seeker-frontend.git master:gh-pages
+git push -f https://github.com:camgraff/city-seeker-frontend.git master:gh-pages
 
 cd -
 
