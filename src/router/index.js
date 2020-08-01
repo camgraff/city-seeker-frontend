@@ -8,6 +8,10 @@ Vue.use(VueRouter);
 
 const routes = [
     {
+        path: '/',
+        redirect: '/game/1234'
+    }
+    {
         path: '/game/:id',
         component: Game,
         props: true
