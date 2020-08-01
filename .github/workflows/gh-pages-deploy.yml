@@ -21,4 +21,7 @@ jobs:
             - name: Run deploy script
               run: |
               git config user.name "camgraff" && git config user.email "graffcameron@gmail.com"
-              npm run gh-pages-deploy
+              ./scripts/deploy.sh
+              env:
+                  VUE_APP_API_BASE_URL: ${{ secrets.VUE_APP_API_BASE_URL }}
+                  VUE_APP_GOOGLE_API_KEY: ${{ secrets.VUE_APP_GOOGLE_API_KEY }}
