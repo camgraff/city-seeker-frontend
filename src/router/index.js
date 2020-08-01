@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import GamePage from '../views/GamePage.vue';
+import Game from '../views/Game.vue';
+import Play from '../views/Play.vue';
 import Lobby from '../views/Lobby.vue';
 
 Vue.use(VueRouter);
@@ -8,7 +9,7 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/game/:id',
-        component: Lobby,
+        component: Game,
         props: true
     },
 ];

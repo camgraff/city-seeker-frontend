@@ -3,7 +3,7 @@ import types from './mutations.js';
 
 const socket = {
     state: () => ({
-        socket: null
+        socket: null,
     }),
 
     getters: {
@@ -20,6 +20,9 @@ const socket = {
         },
         registerListener({commit}, config) {
             commit(types.SOCKET_REGISTER_LISTENER, config);
+        },
+        startGame({commit}, gameId) {
+            commit(types.SOCKET_START_GAME, gameId);
         }
     },
 
@@ -34,6 +37,10 @@ const socket = {
 
         [types.SOCKET_REGISTER_LISTENER]({socket}, {event, callback}) {
             socket.on(event, callback);
+        },
+
+        [types.SOCKET_START_GAME]({socket}, gameId) {
+            socket.emit('startGame', gameId);
         }
     }
 };

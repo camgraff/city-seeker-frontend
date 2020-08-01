@@ -11,6 +11,7 @@
 
         <h1>Lobby</h1>
         <b-table-lite :items="players"></b-table-lite>
+        <b-button @click="() => startGame(id)" variant="primary">Start Game</b-button>
     </div>
 </template>
 
@@ -39,12 +40,17 @@ export default {
         this.registerListener({event: 'userJoined', callback: (username) => {
             this.addPlayer(username);
         }});
+        this.registerListener({event: 'startGame', callback: () => {
+            console.log('game started', this.id);
+            this.$emit('startGame');
+        }});
     },
     methods: {
         ...mapActions([
             'initSocket',
             'joinGame',
-            'registerListener'
+            'registerListener',
+            'startGame'
         ]),
         handleOk(event) {
             event.preventDefault();
@@ -64,7 +70,7 @@ export default {
         },
         addPlayer(name) {
             this.players.push({ name });
-        }
+        },
     }
 
 };
