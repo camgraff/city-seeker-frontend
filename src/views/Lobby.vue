@@ -41,7 +41,7 @@ export default {
             this.addPlayer(username);
         }});
         this.registerListener({event: 'startGame', callback: () => {
-            console.log('game started', this.id);
+            /*console.log('game started', this.id);*/
             this.$emit('startGame');
         }});
     },
