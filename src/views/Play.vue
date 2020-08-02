@@ -15,6 +15,7 @@ import StreetView from '@/components/StreetView.vue';
 import LocationGuesser from '@/components/LocationGuesser.vue';
 import InvitePlayers from '@/components/InvitePlayers.vue';
 import GuessResult from '@/components/GuessResult.vue';
+import { mapActions } from 'vuex';
 const API_KEY = process.env.VUE_APP_GOOGLE_API_KEY;
 
 export default {
@@ -31,6 +32,7 @@ export default {
     },
     mounted() {
         this.loadGoogleScript();
+        this.listenForScoreUpdates();
     },
     data() {
         return {
@@ -45,6 +47,9 @@ export default {
         }
     },
     methods: {
+        ...mapActions([
+            'listenForScoreUpdates'
+        ]),
         // Load Google API in script tag and append
          loadGoogleScript() {
             return new Promise((resolve, reject) => {

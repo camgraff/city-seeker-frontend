@@ -23,6 +23,9 @@ const socket = {
         },
         startGame({commit}, gameId) {
             commit(types.SOCKET_START_GAME, gameId);
+        },
+        updateScore({commit}, config) {
+            commit(types.SOCKET_UPDATE_SCORE, config);
         }
     },
 
@@ -41,6 +44,9 @@ const socket = {
 
         [types.SOCKET_START_GAME]({socket}, gameId) {
             socket.emit('startGame', gameId);
+        },
+        [types.SOCKET_UPDATE_SCORE]({socket}, {score, gameId}) {
+            socket.emit('updateScore', score, gameId);
         }
     }
 };

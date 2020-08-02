@@ -52,7 +52,11 @@ export default {
         },
 
         guessLocation() {
-            this.$emit('guessLocation', this.marker.getPosition());
+            let pos = {
+                lat: this.marker.getPosition().lat(),
+                lng: this.marker.getPosition().lng()
+            };
+            this.$emit('guessLocation', pos);
             let dist = this.calcDistance(
                 this.location.lat,
                 this.location.lng,

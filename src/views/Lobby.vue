@@ -17,7 +17,7 @@
 
 <script>
 import io from 'socket.io-client';
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
     props: {
@@ -29,11 +29,20 @@ export default {
     },
     data() {
         return {
-            players: [],
             showModal: true,
             displayName: '',
             nameIsValid: null
         };
+    },
+    computed: {
+        ...mapGetters([
+            'getPlayers'
+        ]),
+        players() {
+            return this.getPlayers.map(player => {
+                return { name: player.username };
+            });
+        }
     },
     created() {
         this.initSocket(); 
@@ -41,7 +50,6 @@ export default {
             this.addPlayer(username);
         }});
         this.registerListener({event: 'startGame', callback: () => {
-            /*console.log('game started', this.id);*/
             this.$emit('startGame');
         }});
     },
@@ -50,7 +58,8 @@ export default {
             'initSocket',
             'joinGame',
             'registerListener',
-            'startGame'
+            'startGame',
+            'addPlayer'
         ]),
         handleOk(event) {
             event.preventDefault();
@@ -67,9 +76,6 @@ export default {
             } else {
                 this.nameIsValid = false;
             }
-        },
-        addPlayer(name) {
-            this.players.push({ name });
         },
     }
 
