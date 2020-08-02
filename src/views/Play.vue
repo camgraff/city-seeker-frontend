@@ -1,7 +1,12 @@
 <template>
 <div class="game-page" v-if="!isLoading">
-    <street-view @positionChanged="location = $event"></street-view>
-    <location-guesser></location-guesser>
+    <template v-if="hasGuessed">
+        <guess-result :actual="location" :guess="guessedLocation"></guess-result>
+    </template>
+    <template v-else>
+        <street-view @positionChanged="location = $event"></street-view>
+        <location-guesser :location="location" @guessLocation="guessedLocation = $event"></location-guesser>
+    </template>
 </div>
 </template>
 
@@ -9,12 +14,14 @@
 import StreetView from '@/components/StreetView.vue';
 import LocationGuesser from '@/components/LocationGuesser.vue';
 import InvitePlayers from '@/components/InvitePlayers.vue';
+import GuessResult from '@/components/GuessResult.vue';
 const API_KEY = process.env.VUE_APP_GOOGLE_API_KEY;
 
 export default {
     components: {
         StreetView,
         LocationGuesser,
+        GuessResult
     },
     props: {
         id: {
@@ -28,8 +35,14 @@ export default {
     data() {
         return {
             isLoading: true,
-            location: {}
+            location: {},
+            guessedLocation: {}
         };
+    },
+    computed: {
+        hasGuessed() {
+            return !_.isEmpty(this.guessedLocation);
+        }
     },
     methods: {
         // Load Google API in script tag and append

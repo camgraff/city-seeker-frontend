@@ -1,12 +1,21 @@
 <template>
 <div>
     <div id="location-guesser"></div>
-    <button v-if="marker != null" @click="guessLocation">Submit Guess</button>
+    <b-button v-if="marker != null" variant="primary" @click="guessLocation">Submit Guess</b-button>
 </div>
 </template>
 
 <script>
+const EARTH_RADIUS = 6371; // kilometers
+const MAX_DISTANCE = Math.round(EARTH_RADIUS * 2 * Math.PI / 2);
+
 export default {
+    props: {
+        location: {
+            type: Object,
+            required: true
+        }
+    },
     mounted() {
         this.initMap();
     },
@@ -43,11 +52,12 @@ export default {
         },
 
         guessLocation() {
+            this.$emit('guessLocation', this.marker.getPosition());
             let dist = this.calcDistance(
-                position.lat,
-                position.lng,
-                marker.getPosition().lat(),
-                marker.getPosition().lng()
+                this.location.lat,
+                this.location.lng,
+                this.marker.getPosition().lat(),
+                this.marker.getPosition().lng()
             );
         },
 
@@ -68,7 +78,6 @@ export default {
                 Math.pow(Math.sin(dlng / 2), 2);
 
             dist = 2 * Math.asin(Math.sqrt(dist));
-            const EARTH_RADIUS = 6371; // kilometers
             dist *= EARTH_RADIUS;
             return dist;
         },
