@@ -5,6 +5,7 @@ You can walk around via a Google Street View window and when you have an idea of
 You are awarded points based on how close your guess was to the actual location.
 
 [Back-end Repo](https://github.com/camgraff/city-seeker-backend)
+
 [Live Site](https://camgraff.github.io/city-seeker-frontend)
 
 ## Project setup
