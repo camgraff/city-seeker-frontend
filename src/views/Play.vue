@@ -1,5 +1,5 @@
 <template>
-<div class="game-page" v-if="!isLoading">
+<b-container class="game-page" v-if="!isLoading">
     <template v-if="hasGuessed">
         <guess-result :actual="location" :guess="guessedLocation"></guess-result>
     </template>
@@ -7,7 +7,7 @@
         <street-view @positionChanged="location = $event"></street-view>
         <location-guesser :location="location" @guessLocation="guessedLocation = $event"></location-guesser>
     </template>
-</div>
+</b-container>
 </template>
 
 <script>

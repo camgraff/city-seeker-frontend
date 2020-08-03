@@ -1,5 +1,5 @@
 <template>
-    <div class="lobby">
+    <b-container class="lobby">
         <b-modal v-model="showModal" title="Enter Display Name" @ok="handleOk">
             <b-form-input 
                 :state="nameIsValid" 
@@ -12,7 +12,7 @@
         <h1>Lobby</h1>
         <b-table-lite :items="players"></b-table-lite>
         <b-button @click="() => startGame(id)" variant="primary">Start Game</b-button>
-    </div>
+    </b-container>
 </template>
 
 <script>

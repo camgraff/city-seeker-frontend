@@ -1,7 +1,7 @@
 <template>
 <div>
     <div id="location-guesser"></div>
-    <b-button v-if="marker != null" variant="primary" @click="guessLocation">Submit Guess</b-button>
+    <b-button id="submit-guess" block v-if="marker != null" variant="primary" @click="guessLocation">Submit Guess</b-button>
 </div>
 </template>
 
@@ -94,5 +94,9 @@ export default {
     width: 100%;
     height: 500px;
     margin: auto;
+}
+#submit-guess {
+    margin: auto;
+    margin-top: 2rem;
 }
 </style>

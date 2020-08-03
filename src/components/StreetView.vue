@@ -107,5 +107,7 @@ export default {
 </script>
 
 <style>
-
+#street-view {
+    margin-bottom: 2rem;
+}
 </style>

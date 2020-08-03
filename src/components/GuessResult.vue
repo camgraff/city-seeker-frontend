@@ -29,9 +29,9 @@ export default {
     },
     mounted() {
         this.initMap();
-        let score = Math.round(this.distanceOff / MAX_DISTANCE * 1000);
+        let score = Math.round((MAX_DISTANCE - this.distanceOff) / MAX_DISTANCE * 1000);
         this.updateScore({
-            score: Math.round(score),
+            score,
             gameId: this.$route.params.id
         });
     },
