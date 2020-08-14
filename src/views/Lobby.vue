@@ -1,6 +1,15 @@
 <template>
     <b-container class="lobby">
-        <b-modal v-model="showModal" title="Enter Display Name" @ok="handleOk">
+        <b-modal 
+            ok-only 
+            hide-header-close 
+            no-close-on-backdrop 
+            no-close-on-esc
+            v-model="showModal" 
+            title="Enter Display Name" 
+            :ok-disabled="displayName == ''"
+            @ok="handleOk"
+        >
             <b-form-input 
                 :state="nameIsValid" 
                 v-model="displayName" 
