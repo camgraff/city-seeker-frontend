@@ -1,7 +1,7 @@
 <template>
 <div>
     <div id="location-guesser"></div>
-    <b-button id="submit-guess" block v-if="marker != null" variant="primary" @click="guessLocation">Submit Guess</b-button>
+    <b-button id="submit-guess" block :disabled="marker == null" variant="primary" @click="guessLocation">Submit Guess</b-button>
 </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
         initMap() {
             const ZOOM_LEVEL = 2;
             let map = new window.google.maps.Map(document.getElementById("location-guesser"), {
-                center: { lat: -34.397, lng: 150.644 },
+                center: { lat: 0, lng: 0 },
                 zoom: ZOOM_LEVEL,
                 disableDefaultUI: true,
                 minZoom: ZOOM_LEVEL,

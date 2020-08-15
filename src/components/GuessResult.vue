@@ -100,7 +100,6 @@ export default {
 <style scoped lang="scss">
 .guess-result {
     width: 100%;
-    height: 500px;
     margin: auto;
     #map {
         width: 100%;

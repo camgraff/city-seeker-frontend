@@ -4,6 +4,7 @@
         <guess-result :actual="location" :guess="guessedLocation"></guess-result>
     </template>
     <template v-else>
+        <p>Use the street view controls to take a look around. When you are ready, use the map below to guess where you are.</p>
         <street-view @positionChanged="location = $event"></street-view>
         <location-guesser :location="location" @guessLocation="guessedLocation = $event"></location-guesser>
     </template>
