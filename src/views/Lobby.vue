@@ -1,6 +1,7 @@
 <template>
-    <b-container class="lobby">
+    <b-container class="lobby px-5" fluid>
         <b-modal 
+            centered
             ok-only 
             hide-header-close 
             no-close-on-backdrop 
@@ -18,7 +19,23 @@
             </b-form-input>
         </b-modal>
 
-        <h1>Lobby</h1>
+        <b-modal
+            centered
+            ok-only
+            v-model="invitePlayers"
+            title="Invite Friends"
+        >
+            <p>Send your friend the link below to have them join your game!</p>
+            <b-form-input
+                :value="url"
+                id="invite-url"
+                readonly
+            ></b-form-input>
+            <b-button @click="copyURL" class="ml-2" title="Copy Invite URL" variant="secondary"><b-icon-clipboard></b-icon-clipboard></b-button>
+        </b-modal>
+
+        <b-button variant="info" class="float-right" @click="invitePlayers = true">Invite Friends</b-button>
+        <h1 class="">Lobby</h1>
         <b-table-lite :items="players"></b-table-lite>
         <b-button @click="() => startGame(id)" variant="primary">Start Game</b-button>
     </b-container>
@@ -40,7 +57,8 @@ export default {
         return {
             showModal: true,
             displayName: '',
-            nameIsValid: null
+            nameIsValid: null,
+            invitePlayers: false,
         };
     },
     computed: {
@@ -51,6 +69,9 @@ export default {
             return this.getPlayers.map(player => {
                 return { name: player.username };
             });
+        },
+        url() {
+            return window.location.href;
         }
     },
     created() {
@@ -86,6 +107,10 @@ export default {
                 this.nameIsValid = false;
             }
         },
+        copyURL() {
+            document.getElementById('invite-url').select();
+            document.execCommand('copy');
+        }
     }
 
 };
@@ -94,6 +119,14 @@ export default {
 <style scoped lang="scss">
 .lobby {
     text-align: center;
+    h1 {
+        clear: both;
+    }
 }
 
+#invite-url {
+    width: 80%;
+    margin-right: 0;
+    display: inline;
+}
 </style>
